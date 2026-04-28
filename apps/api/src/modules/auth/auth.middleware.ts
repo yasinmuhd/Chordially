@@ -1,8 +1,10 @@
 import type { NextFunction, Request, Response } from "express";
-import { getUserById } from "./auth.store.js";
+import { getUserById, isBanned } from "./auth.store.js";
 import { verifyToken } from "./auth.tokens.js";
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Express {
     interface Request {
       authUser?: ReturnType<typeof getUserById>;
@@ -30,6 +32,14 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
 
   if (!user) {
     res.status(401).json({ error: "User not found" });
+    return;
+  }
+
+  if (isBanned(user.id)) {
+    res.status(403).json({
+      error: "account_banned",
+      message: "Your account has been suspended. Contact support to appeal."
+    });
     return;
   }
 
