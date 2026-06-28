@@ -1,11 +1,12 @@
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
+import { StatusBar } from "expo-status-bar"
+import { StyleSheet, View } from "react-native"
+import EditCreatorProfileScreen from "./src/screens/EditCreatorProfileScreen"
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Chordially mobile foundation</Text>
-      <StatusBar style='auto' />
+      <EditCreatorProfileScreen />
+      <StatusBar style="auto" />
     </View>
   )
 }
@@ -13,8 +14,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#f8fafc",
   },
 })
